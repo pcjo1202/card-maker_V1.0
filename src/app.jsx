@@ -1,8 +1,13 @@
 import React from 'react'
-import './App.css'
+import styles from './app.module.css'
+import LoginBox from './components/login_box/login_box'
 
 function App () {
-  return <div className='App' />
+  return (
+    <div className='container'>
+      <LoginBox />
+    </div>
+  )
 }
 
 export default App
