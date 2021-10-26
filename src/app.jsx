@@ -4,7 +4,7 @@ import LoginBox from './components/login_box/login_box'
 
 function App () {
   return (
-    <div className='container'>
+    <div className={styles.container}>
       <LoginBox />
     </div>
   )
