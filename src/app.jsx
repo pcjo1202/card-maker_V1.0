@@ -1,28 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Router } from 'react-router'
 import styles from './app.module.css'
 import LoginBox from './components/login_box/login_box'
+import MainPage from './components/main_page/main_page'
 
-function App ({ firebase }) {
-  const [signInCheck, setSignInCheck] = useState(true)
+function App ({ authLogin }) {
+  const [signInCheck, setSignInCheck] = useState()
 
   const handleAuth = () => {
-    firebase.googleAuthTest()
+    authLogin.googleAuthTest()
   }
 
   const logOut = () => {
-    firebase.logOut()
-    if (firebase.currentUserState === null) {
-      setSignInCheck(false)
-    }
+    authLogin.logOut()
   }
+
+  useEffect(() => {}, [])
 
   return (
     <div className={styles.container}>
-      <LoginBox handleAuth={handleAuth} />
-      <button onClick={logOut}>
-        {signInCheck ? '로그 아웃' : '로그인'}
-      </button>
-      <button onClick={firebase.currentUserState}>로그인 상태확인</button>
+      {signInCheck
+        ? <MainPage logOut={logOut} />
+        : <LoginBox handleAuth={handleAuth} />}
     </div>
   )
 }
