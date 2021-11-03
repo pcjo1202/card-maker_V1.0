@@ -1,8 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useHistory } from 'react-router'
 import CardList from '../card_list/card_list'
 import styles from './main_page.module.css'
 
-const MainPage = ({ logOut }) => {
+const MainPage = ({ authLogin }) => {
+  const history = useHistory()
+  const goToLoginPage = () => {
+    history.push('/')
+  }
+  const logOut = () => {
+    authLogin.logOut()
+    goToLoginPage()
+  }
+
+  useEffect(() => {
+    authLogin //
+      .onAuthChange(user => {
+        !user && goToLoginPage()
+      })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <div className={styles.wrapper}>
       <header className={styles.header}>
