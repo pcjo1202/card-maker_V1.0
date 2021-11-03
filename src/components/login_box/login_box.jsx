@@ -9,7 +9,7 @@ const LoginBox = ({ authLogin }) => {
   const goToMain = useCallback(userId => {
     history.push({
       pathname: '/main',
-      state: { id: userId }
+      state: { id: userId } // 로그인 한 user의 정보를 전달해준다
     })
   })
 
