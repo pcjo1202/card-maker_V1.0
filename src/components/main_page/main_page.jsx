@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
+import CardEditor from '../card_editor/card_editor'
 import CardList from '../card_list/card_list'
 import CardMaker from '../card_maker/card_maker'
 import Footer from '../footer/footer'
@@ -46,7 +47,10 @@ const MainPage = ({ authLogin }) => {
     <div className={styles.mainPage}>
       <Header logOut={logOut} />
       <section className={styles.container}>
-        <CardMaker cards={cards} onAddCard={onAddCard} />
+        <div className={styles.CardMaker}>
+          {cards.map(cards => <CardEditor cards={cards} key={cards.id} />)}
+          <CardMaker cards={cards} onAddCard={onAddCard} />
+        </div>
         <CardList cards={cards} key={cards.id} />
       </section>
       <Footer />

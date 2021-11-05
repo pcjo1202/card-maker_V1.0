@@ -1,85 +1,62 @@
-import React, { useRef } from 'react'
-import styles from './card_maker.module.css'
+import React from 'react'
+import styles from './card_editor.module.css'
 
-const CardMaker = ({ onAddCard }) => {
-  const formRef = useRef()
-  const nameRef = useRef()
-  const departmentRef = useRef()
-  const themeRef = useRef()
-  const ageRef = useRef()
-  const emailRef = useRef()
-  const messageRef = useRef()
-
+const CardEditor = ({ cards, onAddCard }) => {
   function onAdd (event) {
     event.preventDefault()
-    const card = {
-      id: Date.now(),
-      name: nameRef.current.value || '',
-      department: departmentRef.current.value || '',
-      theme: themeRef.current.value || '',
-      age: ageRef.current.value || '',
-      email: emailRef.current.value || '',
-      message: messageRef.current.value || '',
-      fileName: '' || '',
-      fileURL: null || ''
-    }
-    formRef.current.reset()
-    onAddCard(card)
   }
+
+  const { name, department, age, theme, email, message } = cards
 
   return (
     <section className={styles.card_maker}>
-      <form
-        ref={formRef}
-        className={styles.editor}
-        onSubmit={event => onAdd(event)}
-      >
+      <form className={styles.editor} onSubmit={event => onAdd(event)}>
         <input
-          ref={nameRef}
           type='text'
           name='name'
           placeholder='name'
           className={styles.name}
+          value={name}
         />
         <input
-          ref={departmentRef}
           type='text'
           name='department'
           placeholder='department'
           className={styles.department}
+          value={department}
         />
 
-        <select ref={themeRef} name='theme' className={styles.themeColor}>
+        <select name='theme' className={styles.themeColor} value={theme}>
           <option value='ligth'>light</option>
           <option value='dark'>dark</option>
         </select>
         <input
-          ref={ageRef}
           type='text'
           name='age'
           placeholder='age'
           className={styles.age}
+          value={age}
         />
         <input
-          ref={emailRef}
           type='text'
           name='email'
           placeholder='email'
           className={styles.email}
+          value={email}
         />
 
         <textarea
-          ref={messageRef}
           placeholder='뭐라도 써'
           className={styles.message}
           name='message'
           cols='30'
           rows='5'
+          value={message}
         />
         <div className={styles.Btn}>
           <button className={styles.selectImage}>이미지선택</button>
           <button className={styles.saveBtn} onClick={onAdd}>
-            저장
+            삭제
           </button>
         </div>
       </form>
@@ -87,4 +64,4 @@ const CardMaker = ({ onAddCard }) => {
   )
 }
 
-export default CardMaker
+export default CardEditor
