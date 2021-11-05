@@ -1,0 +1,55 @@
+.card_maker {
+  flex-basis: 50%;
+  border-right: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 57rem) {
+  .card_maker {
+    border-right: none;
+    border-bottom: 1px solid gray;
+  }
+}
+
+.title {
+  font-size: 3rem;
+  color: rgb(83, 83, 108);
+  margin-top: 0.8rem;
+}
+
+.editor {
+  background-color: chartreuse;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 600px;
+}
+
+.name,
+.department,
+.themeColor {
+  flex: 1 1 30%;
+  padding: 0.5em 0.3em;
+}
+
+.age,
+.email {
+  flex: 1 1 40%;
+  padding: 0.5em 0.3em;
+}
+
+.message {
+  flex: 1 1 100%;
+}
+
+.Btn {
+  width: 100%;
+  display: flex;
+}
+
+.selectImage,
+.saveBtn {
+  flex: 1 1 50%;
+  padding: 0.5em 0.3em;
+}

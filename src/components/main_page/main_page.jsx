@@ -1,9 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import CardList from '../card_list/card_list'
+import CardMaker from '../card_maker/card_maker'
+import Footer from '../footer/footer'
+import Header from '../header/header'
 import styles from './main_page.module.css'
 
 const MainPage = ({ authLogin }) => {
+  const cardData = {
+    id: '1',
+    name: '박창조',
+    department: '정보통신공학과 & 컴퓨터공학과',
+    theme: 'white',
+    age: '24',
+    email: 'ckdwh1202@gmail.com',
+    message: '나는 창조다',
+    fileName: '',
+    fileURL: null
+  }
+  const [cards, setCards] = useState([cardData])
+
   const history = useHistory()
   const goToLoginPage = () => {
     history.push('/')
@@ -21,20 +37,19 @@ const MainPage = ({ authLogin }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const onAddCard = card => {
+    setCards([...cards, card])
+    console.log(cards)
+  }
+
   return (
-    <div className={styles.wrapper}>
-      <header className={styles.header}>
-        <div className={styles.title}>Card Maker</div>
-        <button onClick={logOut} className={styles.logOutBtn}>
-          Logout
-        </button>
-      </header>
-      <main className={styles.content}>
-        <CardList />
-        <section className={styles.card_maker}>
-          {}
-        </section>
-      </main>
+    <div className={styles.mainPage}>
+      <Header logOut={logOut} />
+      <section className={styles.container}>
+        <CardMaker cards={cards} onAddCard={onAddCard} />
+        <CardList cards={cards} key={cards.id} />
+      </section>
+      <Footer />
     </div>
   )
 }
