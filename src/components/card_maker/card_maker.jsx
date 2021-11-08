@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import styles from './card_maker.module.css'
 
-const CardMaker = ({ onAddCard }) => {
+const CardMaker = ({ createAndChange }) => {
   const formRef = useRef()
   const nameRef = useRef()
   const departmentRef = useRef()
@@ -24,7 +24,7 @@ const CardMaker = ({ onAddCard }) => {
       fileURL: null || ''
     }
     formRef.current.reset()
-    onAddCard(card)
+    createAndChange(card)
   }
 
   return (

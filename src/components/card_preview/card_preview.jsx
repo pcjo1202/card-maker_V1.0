@@ -4,7 +4,7 @@ import styles from './card_preview.module.css'
 const CardPreview = ({ card }) => {
   const DEAFAULT_IMGAGE = 'image/seoheyon.jpg'
   const imgURL = card.fileURL || DEAFAULT_IMGAGE
-  const { name, department, email, produce } = card
+  const { name, department, email, message } = card
   return (
     <li className={styles.card_preview}>
       <img src={imgURL} alt='카드사진' className={styles.card_image} />
@@ -12,15 +12,15 @@ const CardPreview = ({ card }) => {
         <h2 className={styles.name}>
           {name}
         </h2>
-        <span className={styles.department}>
+        <p className={styles.department}>
           {department}
-        </span>
-        <span className={styles.email}>
+        </p>
+        <p className={styles.email}>
           {email}
-        </span>
+        </p>
         <hr />
         <h3 className={styles.produce}>
-          {produce}
+          {message}
         </h3>
       </div>
     </li>
