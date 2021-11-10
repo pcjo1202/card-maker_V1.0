@@ -7,7 +7,7 @@ import Footer from '../footer/footer'
 import Header from '../header/header'
 import styles from './main_page.module.css'
 
-const MainPage = ({ authLogin }) => {
+const MainPage = ({ FileInput, authLogin }) => {
   const cardData = {
     '1': {
       id: '1',
@@ -17,8 +17,9 @@ const MainPage = ({ authLogin }) => {
       age: '24',
       email: 'ckdwh1202@gmail.com',
       message: '나는 창조다',
-      fileName: '',
-      fileURL: null
+      fileName: 'seoheyon',
+      fileURL:
+        'https://res.cloudinary.com/dbbyjo/image/upload/v1636536297/card_maker/fbuteaalsk9x1cymsnhc.jpg'
     }
   }
   const [cards, setCards] = useState(cardData)
@@ -37,7 +38,6 @@ const MainPage = ({ authLogin }) => {
       .onAuthChange(user => {
         !user && goToLoginPage()
       })
-    console.log(Object.keys(cards))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -64,13 +64,18 @@ const MainPage = ({ authLogin }) => {
         <div className={styles.CardMaker}>
           {Object.keys(cards).map(key =>
             <CardEditor
+              FileInput={FileInput}
+              key={key}
               cards={cards[key]}
               onDelete={onDelete}
-              key={key}
               createAndChange={createAndChange}
             />
           )}
-          <CardMaker cards={cards} createAndChange={createAndChange} />
+          <CardMaker
+            FileInput={FileInput}
+            cards={cards}
+            createAndChange={createAndChange}
+          />
         </div>
         <CardList cards={cards} />
       </section>

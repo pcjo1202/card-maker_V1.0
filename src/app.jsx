@@ -9,7 +9,7 @@ import styles from './app.module.css'
 import LoginBox from './components/login_box/login_box'
 import MainPage from './components/main_page/main_page'
 
-function App ({ authLogin }) {
+function App ({ FileInput, authLogin }) {
   return (
     <div className={styles.app}>
       <BrowserRouter>
@@ -19,7 +19,7 @@ function App ({ authLogin }) {
               <LoginBox authLogin={authLogin} />
             </Route>
             <Route path='/main'>
-              <MainPage authLogin={authLogin} />
+              <MainPage FileInput={FileInput} authLogin={authLogin} />
             </Route>
           </Switch>
         </Router>

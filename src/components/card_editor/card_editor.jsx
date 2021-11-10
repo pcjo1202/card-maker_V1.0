@@ -1,12 +1,12 @@
 import React from 'react'
 import styles from './card_editor.module.css'
 
-const CardEditor = ({ cards, onDelete, createAndChange }) => {
-  const { name, department, age, theme, email, message } = cards
+const CardEditor = ({ FileInput, cards, onDelete, createAndChange }) => {
+  const { name, department, age, theme, email, message, fileName } = cards
 
   function onDeleteBtn (event) {
     event.preventDefault()
-    console.log(onDelete(cards.id))
+    onDelete(cards.id)
   }
 
   function onChange (event) {
@@ -14,12 +14,19 @@ const CardEditor = ({ cards, onDelete, createAndChange }) => {
     if (event.currentTarget.value === null) {
       return
     }
-    const updateData = {
+
+    createAndChange({
       ...cards,
       [event.currentTarget.name]: event.currentTarget.value
-    }
+    })
+  }
 
-    createAndChange(updateData)
+  const onFileChange = file => {
+    createAndChange({
+      ...cards,
+      fileName: file.fileName,
+      fileURL: file.fileURL
+    })
   }
 
   return (
@@ -79,7 +86,11 @@ const CardEditor = ({ cards, onDelete, createAndChange }) => {
           onChange={onChange}
         />
         <div className={styles.Btn}>
-          <button className={styles.selectImage}>이미지선택</button>
+          <FileInput
+            fileName={fileName}
+            card={cards}
+            onFileChange={onFileChange}
+          />
           <button className={styles.saveBtn} onClick={onDeleteBtn}>
             삭제
           </button>

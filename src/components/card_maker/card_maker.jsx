@@ -1,7 +1,7 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from './card_maker.module.css'
 
-const CardMaker = ({ createAndChange }) => {
+const CardMaker = ({ FileInput, createAndChange, cards }) => {
   const formRef = useRef()
   const nameRef = useRef()
   const departmentRef = useRef()
@@ -9,6 +9,11 @@ const CardMaker = ({ createAndChange }) => {
   const ageRef = useRef()
   const emailRef = useRef()
   const messageRef = useRef()
+
+  const [file, setFile] = useState({
+    fileName: null,
+    fileURL: null
+  })
 
   function onAdd (event) {
     event.preventDefault()
@@ -20,11 +25,22 @@ const CardMaker = ({ createAndChange }) => {
       age: ageRef.current.value || '',
       email: emailRef.current.value || '',
       message: messageRef.current.value || '',
-      fileName: '' || '',
-      fileURL: null || ''
+      fileName: file.fileName || '',
+      fileURL: file.fileURL || ''
     }
     formRef.current.reset()
     createAndChange(card)
+    setFile({
+      fileName: null,
+      fileURL: null
+    })
+  }
+
+  const onFileChange = file => {
+    setFile({
+      fileName: file.fileName,
+      fileURL: file.fileURL
+    })
   }
 
   return (
@@ -77,7 +93,11 @@ const CardMaker = ({ createAndChange }) => {
           rows='5'
         />
         <div className={styles.Btn}>
-          <button className={styles.selectImage}>이미지선택</button>
+          <FileInput
+            fileName={file.fileName}
+            card={cards}
+            onFileChange={onFileChange}
+          />
           <button className={styles.saveBtn} onClick={onAdd}>
             저장
           </button>
