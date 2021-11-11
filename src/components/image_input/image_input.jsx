@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useRef } from 'react/cjs/react.development'
+import LoadingSpinner from '../loading_spinner/loading_spinner'
 import styles from './image_input.module.css'
 
 const ImageInput = ({ imageUploader, fileName, onFileChange, card }) => {
+  const [loading, setLoading] = useState(false)
   const inputRef = useRef()
   const onClickInput = event => {
     event.preventDefault()
@@ -10,8 +12,10 @@ const ImageInput = ({ imageUploader, fileName, onFileChange, card }) => {
   }
 
   const onChangeImage = async event => {
+    setLoading(true)
     const inputFile = event.target.files[0]
     const uploaded = await imageUploader.upload(inputFile)
+    setLoading(false)
     console.log(uploaded)
     onFileChange({
       fileName: uploaded.original_filename,
@@ -28,12 +32,14 @@ const ImageInput = ({ imageUploader, fileName, onFileChange, card }) => {
         className={styles.input}
         onChange={onChangeImage}
       />
-      <button
-        className={`${styles.button} ${fileName && styles.changeFile}`}
-        onClick={onClickInput}
-      >
-        {fileName || 'No file'}
-      </button>
+      {loading
+        ? <LoadingSpinner />
+        : <button
+          className={`${styles.button} ${fileName && styles.changeFile}`}
+          onClick={onClickInput}
+          >
+          {fileName || 'No file'}
+        </button>}
     </div>
   )
 }
