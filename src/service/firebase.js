@@ -5,7 +5,9 @@ const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
   projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
-  appId: process.env.REACT_APP_FIREBASE_APPID
+  appId: process.env.REACT_APP_FIREBASE_APPID,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASEURL,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET
 }
 
 // Initialize Firebase

@@ -29,11 +29,11 @@ const CardMaker = ({ FileInput, createAndChange, cards }) => {
       fileURL: file.fileURL || ''
     }
     formRef.current.reset()
-    createAndChange(card)
     setFile({
       fileName: null,
       fileURL: null
     })
+    createAndChange(card)
   }
 
   const onFileChange = file => {
